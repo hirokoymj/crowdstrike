@@ -187,6 +187,29 @@ Host setup and management > Sensor update policies > Create new > name it > crea
 
 ## Prevention Policies
 
+**Prevention Policy**: the set of rules controlling how the Falcon sensor detects and blocks malware/threats on a host — settings like malware prevention, exploit mitigation, and machine learning detection levels, applied to specific host groups. Without one assigned, a host is unprotected.
+
+### Make one:
+
+`endpoint security>prevention policies>create new>platform>name>create`
+
+### Enable:
+
+`settings>save>confirm>enable>enable policy`
+
+### Precedence order
+
+This list represents the precedence order in which CrowdStrike applies prevention policies to a host — Default sits at the lowest precedence (a catch-all for hosts not assigned to a custom policy), while Phase 1–3 are custom policies with higher precedence, assigned to specific host groups as you progress through deployment. "Prevention Policy Precedence" is an accurate title for it.
+
+- Phase 3: Full standard protection
+- Phase 2: Interim protection, no AV/EDR in place
+- Phase 1: Rapid deployment, minimal protection
+- Default (lowest precedence): Out-of-box policy, applies before custom phases are set
+
+AV = antivirus — traditional signature-based malware detection.
+
+EDR = Endpoint Detection and Response — monitors endpoint activity in real time to detect, investigate, and respond to threats (like Falcon itself). AV mainly blocks known malware; EDR watches for suspicious behavior, including attacks AV would miss.
+
 ### Demo: Prevention Settings
 
 ### Custom IOAs
@@ -212,3 +235,5 @@ Create machine learning exclusion – 2
 ### References
 
 - [Udemy CrowdStrike: Zero to Falcon Admin](https://ttsus.udemy.com/course/crowdstrike-zero-to-falcon-admin/learn/lecture/36461842?start=30#overview)
+- [Prevention Policy | CrowdStrike Developer Center](https://developer.crowdstrike.com/api-reference/collections/prevention-policy/)
+- [CrowdStrike Prevention Policies: Reduce False Positives & Block Ransomware | Inventive HQ](https://inventivehq.com/knowledge-base/crowdstrike/how-to-setup-prevention-policies-in-crowdstrike-falcon)
