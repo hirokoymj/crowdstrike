@@ -49,9 +49,14 @@ ps -e | grep falcon
 
 ## 3. Host Management and Setup
 
-- 3.1 Understand how filtering might be used in the Host Management page
-- 3.2 Disable detections for a host
-- 3.3 Explain the effect of disabling detections on a host
+- 3.1 Understand how filtering might be used in the Host Management page - DONE
+- 3.2 Disable detections for a host - DONE
+
+### 3.3 Explain the effect of disabling detections on a host
+
+- detections ≠ prevention.
+- Disabling detections does not turn off the sensor's protection.
+
 - 3.4 Explain the impact of Reduced Functionality Mode (RFM) and why it might be caused
 - 3.5 Find hosts in RFM
 - 3.6 Locate inactive sensors
