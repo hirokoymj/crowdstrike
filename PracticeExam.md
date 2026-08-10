@@ -11,6 +11,12 @@ Which of the Audit logs would confirm or deny your suspicion?
 - Sensor visibility exclusions
 - RTR
 
+```
+## Exam Flow
+- Who changed a configuration in Falcon? → Falcon UI audit log
+- Falcon UI audit logs record administrative actions performed through the Falcon console, such as changing or disabling a policy.
+```
+
 ## Question 2 of 25
 
 You have been asked to collect the sensor diagnostics logs for an online Windows host in a remote office to troubleshoot an application compatibility issue.
@@ -21,6 +27,18 @@ Which procedure should you use?
 - Use the Microsoft Remote Desktop tool to collect the Falcon Sensor logs from the %SYSTEMROOT%\Temp folder
 - On the Host management page, select the host, then click collect diagnostics
 - Use Real Time Response to execute CSWINDIAG and then collect the CSWINDIAG logs from the host✅
+
+```
+## Exam flow
+Remote Windows host + collect sensor diagnostic logs → RTR → CSWINDIAG ✅
+
+The important clues are “online Windows host” and “remote office.”
+
+RTR (Real Time Response) lets the Falcon administrator remotely connect to an online endpoint and run diagnostic commands without needing the user to do anything.
+
+Then
+Falcon Admin → RTR → Windows host → run CSWINDIAG → collect diagnostic logs
+```
 
 ## Question 3 of 25
 
