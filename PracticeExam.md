@@ -239,13 +239,9 @@ How should the false positives be managed?
 
 ### Why?
 
-```
-The situation is:
-
-One known vendor binary is generating false-positive detections across multiple endpoints.
-
-The best approach is to create an IOC exclusion/allow for the known-good binary using its SHA-256 hash.
-```
+- known-good/known-bad single file → IOC Management + hash + Allow/Block/Detect.
+- Endpoint Security → IOC Management → Add hashes
+  st approach is to create an IOC exclusion/allow for the known-good binary using its SHA-256 hash.
 
 ## Question 11 of 25
 
