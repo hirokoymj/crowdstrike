@@ -1,6 +1,38 @@
 # Practice Exam
 
-## Question 1 of 25
+- [Practice Exam](#practice-exam)
+  - [Question 1 of 25 ✅](#question-1-of-25-)
+  - [Question 2 of 25❌](#question-2-of-25) - [Step-by-step in Falcon Console](#step-by-step-in-falcon-console)
+  - [Question 3 of 25 ✅](#question-3-of-25-) - [Why](#why)
+  - [Question 4 of 25 ✅](#question-4-of-25-)
+  - [Question 5 of 25 ✅](#question-5-of-25-) - [Why?](#why-1)
+  - [Question 6 of 25✅](#question-6-of-25) - [Why?](#why-2)
+  - [Question 7 of 25✅](#question-7-of-25) - [Why?](#why-3)
+  - [Question 8 of 25✅](#question-8-of-25) - [Why?](#why-4)
+  - [Question 9 of 25✅](#question-9-of-25)
+  - [Question 10 of 25](#question-10-of-25)
+    - [Why?](#why-5)
+  - [Question 11 of 25](#question-11-of-25)
+  - [Question 12 of 25](#question-12-of-25)
+  - [Question 13 of 25](#question-13-of-25)
+  - [Question 14 of 25](#question-14-of-25)
+  - [Question 15 of 25](#question-15-of-25)
+  - [Question 16 of 25](#question-16-of-25)
+  - [Question 17 of 25](#question-17-of-25)
+  - [Question 18 of 25](#question-18-of-25)
+  - [Question 19 of 25](#question-19-of-25)
+  - [Question 20 of 25](#question-20-of-25)
+  - [Question 21 of 25](#question-21-of-25)
+  - [Question 22 of 25](#question-22-of-25)
+  - [Question 23 of 25](#question-23-of-25)
+  - [Question 24 of 25 ✅](#question-24-of-25-)
+    - [Correct answer:](#correct-answer)
+      - [🧠 Very simple exam memory](#-very-simple-exam-memory)
+  - [Question 25 of 25](#question-25-of-25)
+
+✅❌
+
+## Question 1 of 25 ✅
 
 You are the Falcon Administrator for your organization, and you suspect one of your users disabled your custom Windows sensor update policy.
 
@@ -17,7 +49,7 @@ Which of the Audit logs would confirm or deny your suspicion?
 - Falcon UI audit logs record administrative actions performed through the Falcon console, such as changing or disabling a policy.
 ```
 
-## Question 2 of 25
+## Question 2 of 25❌
 
 You have been asked to collect the sensor diagnostics logs for an online Windows host in a remote office to troubleshoot an application compatibility issue.
 
@@ -30,19 +62,29 @@ Which procedure should you use?
 
 ```
 ## Exam flow
-Remote Windows host + collect sensor diagnostic logs → RTR → CSWINDIAG ✅
 
-The important clues are “online Windows host” and “remote office.”
-
-RTR (Real Time Response) lets the Falcon administrator remotely connect to an online endpoint and run diagnostic commands without needing the user to do anything.
-
-Then
-Falcon Admin → RTR → Windows host → run CSWINDIAG → collect diagnostic logs
+- Remote Windows host + collect sensor diagnostic logs → RTR → CSWINDIAG ✅
+- The important clues are “online Windows host” and “remote office.”
+- RTR (Real Time Response) lets the Falcon administrator remotely connect to an online endpoint and run diagnostic commands without needing the user to do anything.
 ```
 
-## Question 3 of 25
+#### Step-by-step in Falcon Console
 
-Question 3 of 25
+1. Go to Host setup and management → Host management.
+2. Find the target Windows host.
+3. Open the host and start a Real Time Response session.
+4. In the RTR command window, execute:
+   `cswindiag`
+5. You should see a response indicating that the process was successfully started. CrowdStrike's own PSFalcon example uses exactly the cswindiag RTR command.
+6. Wait for the diagnostic collection to finish.
+7. The diagnostic archive is created on the host. CrowdStrike's automation example looks under:
+   `C:\Program Files\CrowdStrike\Rtr\PutRun`
+   for the newly created CSWinDiag\*.zip file.
+
+8. Use RTR's get capability to retrieve the resulting diagnostic archive to your local system. The PSFalcon example demonstrates this collection flow
+
+## Question 3 of 25 ✅
+
 You need to set up a group to test the newest sensor version.
 
 Which two actions should you take before adding hosts to your test group?
@@ -51,7 +93,7 @@ Which two actions should you take before adding hosts to your test group?
 1. Assign Auto N-2 sensor update policy
 Ensure Auto N-2 is at the highest policy precedence for all OS platforms
 
-2.Assign Auto-Latest sensor update policy
+2.Assign Auto-Latest sensor update policy✅
 Ensure Auto-Latest is at the highest policy precedence for all OS platforms
 
 3. Manually assign the latest version to each sensor update policy
@@ -61,7 +103,17 @@ Ensure that policy is at the lowest policy precedence for all OS platforms
 Ensure Auto N-1 is at the lowest policy precedence for all OS platforms
 ```
 
-## Question 4 of 25
+#### Why
+
+```
+Automatically keep the assigned hosts on the latest available Falcon Sensor version.
+Auto-Latest policy
+→ automatically selects the newest sensor release
+→ hosts assigned to that policy update to that version
+→ use the test group to validate the new version
+```
+
+## Question 4 of 25 ✅
 
 Where can you find the sensor version for a specific endpoint?
 
@@ -70,7 +122,7 @@ Where can you find the sensor version for a specific endpoint?
 - Host Management✅
 - Sensor coverage lookup
 
-## Question 5 of 25
+## Question 5 of 25 ✅
 
 The Falcon Sensor was installed on a Virtual Machine template using the installation parameter NO_START=1. After installation, the Virtual Machine template is rebooted.
 
@@ -79,7 +131,31 @@ The Falcon Sensor was installed on a Virtual Machine template using the installa
 - The Falcon Sensor will start at reboot with the same Agent ID
 - The Falcon Sensor will not start until you set an Agent ID
 
-## Question 6 of 25
+#### Why?
+
+> Prevents the sensor from starting up after installation. The next time the host boots, the sensor will start and be assigned a new agent ID (AID). This parameter is usually used when preparing master images for cloning.
+
+```
+             MASTER VM TEMPLATE
+                    │
+          Install Falcon Sensor
+             NO_START=1
+                    │
+          Sensor stays stopped
+                    │
+              Reboot template
+                    │
+          Sensor starts + gets NEW AID
+                    │
+          ┌─────────┼─────────┐
+          ↓         ↓         ↓
+        VM-1       VM-2      VM-3
+```
+
+- The reason is cloning.
+- Each cloned VM needs its own unique Agent ID (AID).
+
+## Question 6 of 25✅
 
 Which action is available for an existing API Client?
 
@@ -88,19 +164,35 @@ Which action is available for an existing API Client?
 - Show an API Client Secret
 - Retrieve an API Client Secret
 
-## Question 7 of 25
+#### Why?
 
-What controls the rate at which your sensors will receive automatic sensor updates?
+What an "API Client" is in Falcon
+
+> In the Falcon console, under Support and resources → API Clients and Keys, an "API Client" is essentially an OAuth2 service-account credential pair: a Client ID and Client Secret. It's the same pattern as an AWS IAM access key/secret pair or a service account key in GCP — a non-human identity that a script, integration, or SIEM connector authenticates with instead of a person logging in. Each API Client also has scopes attached to it (e.g., "Hosts: Read", "Detections: Read/Write"), which limit exactly which Falcon REST endpoints that credential is allowed to call.
+
+Why "Delete an API Client" is the available action
+
+> The exam question is testing a specific quirk of the console UI's lifecycle for these credentials:
+
+> Once you create an API Client, the Client Secret is shown to you exactly once, at creation time. Falcon does not let you edit an existing client's ID or re-display its secret afterward — if you lose the secret, your only path is to revoke/reset it, not "edit" it in place. There's also no rename/relabel action on an existing client in the base console. What the console does let you do to an existing client is delete it outright, which immediately revokes its ability to authenticate.
+
+## Question 7 of 25✅
+
+What controls the rate at which your sensors will receive A Falcon sensor in your environment?
 
 - Channel file update throttling
 - Maintenance tokens
 - Sensor update policy
 - Sensor update throttling✅
 
-## Question 8 of 25
+#### Why?
+
+- Support and resources → General settings → Security → Throttle updates
+- Limit how many sensor updates can be initiated per minute. Consider increasing the limit if updates are taking too long and decreasing if using too much network bandwidth.
+
+## Question 8 of 25✅
 
 You are writing a new Fusion SOAR workflow to remediate new detections of malware.
-
 Which Fusion SOAR workflow trigger will accomplish this?
 
 - New Case Trigger
@@ -108,7 +200,12 @@ Which Fusion SOAR workflow trigger will accomplish this?
 - Hourly Scheduled Trigger
 - Audit - New Detection Trigger
 
-## Question 9 of 25
+#### Why?
+
+- Next-Gen SIEM → Fusion SOAR → Workflows.
+- if this security event happens, automatically do that.
+
+## Question 9 of 25✅
 
 To enhance your security, you want to detect on a list of IP addresses.
 
@@ -117,6 +214,12 @@ How can you use IOC management to accomplish this?
 - Import the list of IP addresses and set the action to Prevent/Block
 - Import the list of IP addresses and set the action to Detect Only✅
 - Import the list of IP addresses and set the action to No action
+
+```
+Why?
+- IOC: a custom list of known-bad hashes, domains, or IPs you feed Falcon to detect or block.
+- Endpoint security → IOC Management
+```
 
 ## Question 10 of 25
 
@@ -129,10 +232,19 @@ How should the false positives be managed?
 
 2. Using IOC Management, add the SHA-256 hash of the binary application and set the action to Block, hide detection
 
-
 3. Using Custom IOA rule groups, add the binary application to the applicable rule group and add the rule group to the appropriate prevention policy
 
 4. Using IOC Management, add the SHA-256 hash of the binary application and set the action to Allow✅
+```
+
+### Why?
+
+```
+The situation is:
+
+One known vendor binary is generating false-positive detections across multiple endpoints.
+
+The best approach is to create an IOC exclusion/allow for the known-good binary using its SHA-256 hash.
 ```
 
 ## Question 11 of 25
@@ -290,7 +402,7 @@ What action will disable RTR on these hosts?
 - Apply a top precedence policy with the RTR access turned off to the host group✅
 - Edit the Default RTR Policy to exclude the host group
 
-## Question 24 of 25
+## Question 24 of 25 ✅
 
 A Falcon sensor in your environment is generating alerts for a binary that has already been allowlisted.
 
@@ -300,6 +412,47 @@ Which report can be used to determine if this is caused by a stale prevention po
 - Prevention Policy Debug Audit Log
 - Machine-Learning Prevention Monitoring Audit Log
 - Sensor Visibility Exclusions Audit Log
+
+### Correct answer:
+
+**Prevention Policy, HTTP visibility**
+
+```
+Prevention Policy
+Sensor Update Policy
+Content Update Policy
+Host retantion Policy
+
+Host setup and management -> List of hosts -> Test-Linux-Prevention
+
+## HTTP visibility checked
+- HTTP visibility, Falcon Sensor actually inspects/monitors unencrypted HTTP traffic on the endpoint.
+- Allows the sensor to monitor unencrypted HTTP traffic for malicious patterns and improved detections.
+
+For unencrypted HTTP, the sensor can inspect things such as:
+
+HTTP requests
+URLs
+HTTP headers
+Content/payload that is transmitted in clear text
+Potential malicious patterns
+
+- Visibility = Give the Falcon Sensor the ability to see/inspect activity.
+```
+
+**FTP visibility**
+
+```
+FTP visibility
+Allows the sensor to monitor unencrypted FTP traffic for malicious patterns and improved detections.
+
+```
+
+#### 🧠 Very simple exam memory
+
+- [Protocol] Visibility = Sensor can see/inspect that protocol's traffic
+- Visibility ≠ automatically block
+- If Falcon identifies something malicious, other prevention/detection mechanisms can take action according to the applicable policy.
 
 ## Question 25 of 25
 

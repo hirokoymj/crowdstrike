@@ -63,6 +63,8 @@ Done (9/1)
 
 ## Navigating and optimizing Falcon support reso
 
+09/06
+
 --
 
 ## Sensor visibility exclusions
@@ -72,3 +74,5 @@ Endpoint security -> Exclusions > Sensor visibility exclusions >
 - to stop collecting any telemetry for files/paths that match the pattern — no event logging, no detections, no preventions for anything under that path.
 
 https://university.crowdstrike.com/learn/courses/472/falcon-102-falcon-platform-onboarding-configuration
+
+
