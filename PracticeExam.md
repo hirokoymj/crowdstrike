@@ -14,8 +14,8 @@
     - [Why?](#why-5)
   - [Question 11 of 25✅](#question-11-of-25)
   - [Question 12 of 25✅](#question-12-of-25)
-  - [Question 13 of 25](#question-13-of-25)
-  - [Question 14 of 25](#question-14-of-25)
+  - [Question 13 of 25✅](#question-13-of-25)
+  - [Question 14 of 25✅](#question-14-of-25)
   - [Question 15 of 25](#question-15-of-25)
   - [Question 16 of 25](#question-16-of-25)
   - [Question 17 of 25](#question-17-of-25)
@@ -288,9 +288,12 @@ C:\Users\*\AppData\Local\AnthropicClaude\*.exe
 C:\Users\*\AppData\Local\Programs\ChatGPT\*.exe
 
 - That tells Falcon's ML engine "trust anything matching this path going forward," so future auto-updates to that same app don't keep re-triggering detections — while the sensor still keeps recording and applying every other detection layer (behavioral/IOA, IOC, etc.) to that app, since ML Exclusions only turn off the ML/static-file engine, not full visibility (unlike Sensor Visibility Exclusions from the last question).
+
+I don't have evidence that Claude or ChatGPT desktop actually gets flagged by CrowdStrike in practice — this is illustrating the mechanism (new/low-prevalence auto-updating binaries) using apps you already have on your laptop, not a documented incident.
+
 ```
 
-## Question 13 of 25
+## Question 13 of 25✅
 
 What is a valid step when troubleshooting sensor installation failure?
 
@@ -299,7 +302,15 @@ What is a valid step when troubleshooting sensor installation failure?
 - Delete any available application crash log files
 - Disable SSL and TLS on the host
 
-## Question 14 of 25
+```
+## Why?
+1. Host Setup and Management > Sensor Downloads.
+2. Installing via command line
+WindowsSensor.exe /install /quiet /norestart CID=YOUR-CUSTOMER-ID
+3. sc query csagent in PowerShell/cmd — should show STATE: RUNNING
+```
+
+## Question 14 of 25✅
 
 You are troubleshooting a host that is showing Changes Pending under the Sensor Update policy within Host Management.
 
@@ -310,6 +321,13 @@ What is the first step you should take?
 - Verify the host is online✅
 - Verify allowlists for the appropriate FQDN/IP Addresses
 
+```
+## Why?
+
+"Changes Pending" means the Falcon Console has queued a policy update (in this case, a sensor version update) for the host, but the sensor hasn't checked in to actually apply it yet. That status just reflects the last known communication state — so the very first thing to rule out is whether the host is even online and able to talk to the CrowdStrike cloud at all.
+
+```
+
 ## Question 15 of 25
 
 What least privilege role would be utilized to extract a quarantined file as a password protected .zip?
@@ -318,6 +336,18 @@ What least privilege role would be utilized to extract a quarantined file as a p
 - Falcon Analyst
 - Falcon Security Lead
 - Quarantine Manager✅
+
+```
+## Why?
+
+- Falcon Administrator — full console control (users, policies, deployment).
+
+- Falcon Security Lead — broad oversight and configuration access, but not full admin.
+
+- Falcon Analyst — investigates detections/alerts; day-to-day triage work.
+
+- Quarantine Manager — manages quarantined files only (view, download, release, delete).
+```
 
 ## Question 16 of 25
 
