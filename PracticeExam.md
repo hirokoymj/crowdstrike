@@ -2,13 +2,19 @@
 
 - [Practice Exam](#practice-exam)
   - [Question 1 of 25 ✅](#question-1-of-25-)
-  - [Question 2 of 25❌](#question-2-of-25) - [Step-by-step in Falcon Console](#step-by-step-in-falcon-console)
-  - [Question 3 of 25 ✅](#question-3-of-25-) - [Why](#why)
+  - [Question 2 of 25❌](#question-2-of-25)
+    - [Step-by-step in Falcon Console](#step-by-step-in-falcon-console)
+  - [Question 3 of 25 ✅](#question-3-of-25-)
+    - [Why](#why)
   - [Question 4 of 25 ✅](#question-4-of-25-)
-  - [Question 5 of 25 ✅](#question-5-of-25-) - [Why?](#why-1)
-  - [Question 6 of 25✅](#question-6-of-25) - [Why?](#why-2)
-  - [Question 7 of 25✅](#question-7-of-25) - [Why?](#why-3)
-  - [Question 8 of 25✅](#question-8-of-25) - [Why?](#why-4)
+  - [Question 5 of 25 ✅](#question-5-of-25-)
+    - [Why?](#why-1)
+  - [Question 6 of 25✅](#question-6-of-25)
+    - [Why?](#why-2)
+  - [Question 7 of 25✅](#question-7-of-25)
+    - [Why?](#why-3)
+  - [Question 8 of 25✅](#question-8-of-25)
+    - [Why?](#why-4)
   - [Question 9 of 25✅](#question-9-of-25)
   - [Question 10 of 25✅](#question-10-of-25)
     - [Why?](#why-5)
@@ -16,19 +22,17 @@
   - [Question 12 of 25✅](#question-12-of-25)
   - [Question 13 of 25✅](#question-13-of-25)
   - [Question 14 of 25✅](#question-14-of-25)
-  - [Question 15 of 25](#question-15-of-25)
-  - [Question 16 of 25](#question-16-of-25)
-  - [Question 17 of 25](#question-17-of-25)
-  - [Question 18 of 25](#question-18-of-25)
-  - [Question 19 of 25](#question-19-of-25)
+  - [Question 15 of 25✅](#question-15-of-25)
+  - [Question 16 of 25✅](#question-16-of-25)
+  - [Question 17 of 25✅](#question-17-of-25)
+  - [Question 18 of 25✅](#question-18-of-25)
+  - [Question 19 of 25✅](#question-19-of-25)
   - [Question 20 of 25](#question-20-of-25)
-  - [Question 21 of 25](#question-21-of-25)
-  - [Question 22 of 25](#question-22-of-25)
-  - [Question 23 of 25](#question-23-of-25)
+  - [Question 21 of 25✅](#question-21-of-25)
+  - [Question 22 of 25✅](#question-22-of-25)
+  - [Question 23 of 25✅](#question-23-of-25)
   - [Question 24 of 25 ✅](#question-24-of-25-)
-    - [Correct answer:](#correct-answer)
-      - [🧠 Very simple exam memory](#-very-simple-exam-memory)
-  - [Question 25 of 25](#question-25-of-25)
+  - [Question 25 of 25✅](#question-25-of-25)
 
 ✅❌
 
@@ -328,7 +332,7 @@ What is the first step you should take?
 
 ```
 
-## Question 15 of 25
+## Question 15 of 25✅
 
 What least privilege role would be utilized to extract a quarantined file as a password protected .zip?
 
@@ -341,15 +345,12 @@ What least privilege role would be utilized to extract a quarantined file as a p
 ## Why?
 
 - Falcon Administrator — full console control (users, policies, deployment).
-
 - Falcon Security Lead — broad oversight and configuration access, but not full admin.
-
 - Falcon Analyst — investigates detections/alerts; day-to-day triage work.
-
 - Quarantine Manager — manages quarantined files only (view, download, release, delete).
 ```
 
-## Question 16 of 25
+## Question 16 of 25✅
 
 An internally used customer application is being blocked by the Falcon sensor. The application is updated infrequently.
 
@@ -360,7 +361,17 @@ Which IOC type and action should you set to allow use of the application?
 - Add the hash of the application and set action to Allow✅
 - Add the domain of the application host location and set action to No Action
 
-## Question 17 of 25
+```
+# Why?
+The hash-based IOC is the right fit because a hash identifies that exact, specific binary.
+
+C:\Users\hirok>certutil -hashfile "C:\Program Files\Google\Chrome\Application\chrome.exe" SHA256
+SHA256 hash of C:\Program Files\Google\Chrome\Application\chrome.exe:
+fa570275efc14bd1da9db152d67694f61ca0e36d59a031ab4827f27b3cf0c08d
+CertUtil: -hashfile command completed successfully.
+```
+
+## Question 17 of 25✅
 
 When deploying the Falcon Sensor alongside an existing security solution, you have aligned to the Phase 2: Interim Protection prevention policy in Falcon.
 
@@ -371,7 +382,15 @@ After initial testing, what is the recommended configuration?
 - Create an exclusion only for Falcon in the current AV solution
 - Create an SVE only in Falcon for the current AV solution
 
-## Question 18 of 25
+```
+## Why?
+- Phase 1: Visibility only, no blocking.
+- Phase 2: Prevention on, coexists with legacy AV.
+- Phase 3: Full protection, legacy AV removed.
+- (Console) Endpoint Security > Prevention Policies
+```
+
+## Question 18 of 25✅
 
 What action allows you to prevent a trusted file path from being uploaded to the CrowdStrike Cloud without disabling uploads globally?
 
@@ -380,28 +399,49 @@ What action allows you to prevent a trusted file path from being uploaded to the
 - A Sensor Visibility exclusion
 - A Custom IOC entry
 
-## Question 19 of 25
+```
+## Why?
+- It's Falcon's own ML — not anything installed on the host.
+- "Machine learning" in that menu refers specifically to CrowdStrike's malware-detection ML engine, which ships as part of the Falcon sensor itself.
+-It has nothing to do with any machine-learning software, framework, or model that might separately exist on the endpoint
+- When you create a machine-learning exclusion for C:\Program Files\ContosoApp\**, you're telling Falcon's own detection engine: "don't run your ML-based scanning against files matching this path"
+
+## ML exclusion vs. IOA exclusion
+- ML exclusions suppress Falcon's file-based ML detection engine
+- IOA exclusions suppress Falcon's behavioral detection engine
+- Both are Falcon's own internal engines — the label just names which one the exclusion targets.
+```
+
+## Question 19 of 25✅
 
 You must create a host group for Windows 11 Workstations that will be easy to maintain. There are no existing Windows 11 hosts in your environment.
 
 What is the correct sequence of steps to accomplish this?
 
 ```
-===✅
+A) ✅
 1. Add a New Host Group, Type Dynamic
 2. EDIT the Assignment Rule, use the filter OS Version
 3. Type Windows 11
 4. Save Host Group
 
-===
+B)
 1. Clone an existing Host group
 2. EDIT the Assignment Rule, add OS Version - Windows 11
 3. Save the host group
 
-===
+C)
 1. Add a New Host Group, Type Static
 2. EDIT the Assignment Rule, use the filter Platform, Windows
 3. Save Host Group
+```
+
+```
+### Why?
+- Dynamic host group: membership auto-updates based on a rule (e.g., OS version = Windows 11) — no manual adding/removing.
+
+- Host setup and management -> Host groups -> Create new group (Name, Desc, Dynamic)
+Edit assignment rule -> OS version = Windows11
 ```
 
 ## Question 20 of 25
@@ -413,29 +453,46 @@ Which report can be used to view records related to the creation of API client a
 - Falcon UI Audit Log
 - Falcon RTR Audit Log
 - API Clients and Keys
-- API Audit Trail✅
+- API Audit Trail✅ - Check if this is the correct answer
 
-## Question 21 of 25
+```
+### Why?
+- The question is asking specifically for a log of creation events — who created an API client/secret pair and when — not a place to manage the clients themselves. That distinction is what separates the four options:
+- Support and Resources → Resources and Tools.
+```
+
+## Question 21 of 25✅
 
 You want to install the Falcon sensor on a host specifically using Red Hat Enterprise Linux that has installation tokens enabled.
 
 Which command should you use?
 
 ```
-1.
-sudo zypper /opt/CrowdStrike/falconctl -s --CID=<CID> --prov-token=ABCD1234
-
-2.✅
-sudo /opt/CrowdStrike/falconctl -s --cid=<CID> --provisioning-token=ABCD1234
-
-3.
-sudo /opt/CrowdStrike/falconctl -s -t ABCD1234
-
-4.
-sudo yum install <installer_filename>
+1. sudo zypper /opt/CrowdStrike/falconctl -s --CID=<CID> --prov-token=ABCD1234
+2. sudo /opt/CrowdStrike/falconctl -s --cid=<CID> --provisioning-token=ABCD1234✅
+3. sudo /opt/CrowdStrike/falconctl -s -t ABCD1234
+4. sudo yum install <installer_filename>
 ```
 
-## Question 22 of 25
+```
+## Linux
+
+1. Install the downloaded RPM
+sudo yum install falcon-sensor-8.10.19402-1.el7.x86_64.rpm
+
+2. Configure CID + provisioning token
+sudo /opt/CrowdStrike/falconctl -s --cid=59C8F9C01A5949289CFAD47712E2F274-07 --provisioning-token=E3A75AFD
+
+3. Start the sensor
+sudo systemctl start falcon-sensor
+
+### Windows
+1. Open PowerShell as Administrator
+
+2. C:\Users\hirok\Downloads\FalconSensor_Windows.exe" /install /quiet /norestart CID=59C8F9C01A5949289CFAD47712E2F274-07 ProvToken=E3A75AFD
+```
+
+## Question 22 of 25✅
 
 When creating a custom IOA for a specific domain, which syntax would be best for detecting or preventing on all subdomains as well?
 
@@ -444,10 +501,11 @@ When creating a custom IOA for a specific domain, which syntax would be best for
 - `.*baddomain.xyz`
 - `.*\.baddomain\.xyz|baddomain\.xyz`✅
 
-## Question 23 of 25
+`
+
+## Question 23 of 25✅
 
 You have a set of hosts in their own group that should not be accessed via Real Time Response (RTR).
-
 What action will disable RTR on these hosts?
 
 - Edit the Default Response Policy, toggle the RTR switch off, and assign the policy to the host group
@@ -455,10 +513,17 @@ What action will disable RTR on these hosts?
 - Apply a top precedence policy with the RTR access turned off to the host group✅
 - Edit the Default RTR Policy to exclude the host group
 
+```
+### why?
+
+- Real Time Response (RTR) is Falcon's remote shell capability
+— it lets an analyst with the right role connect directly to a live endpoint through the Falcon Console and interact with it in near real-time
+- without needing physical or VPN/RDP access to the machine. It's the tool you'd reach for during active incident response.
+```
+
 ## Question 24 of 25 ✅
 
 A Falcon sensor in your environment is generating alerts for a binary that has already been allowlisted.
-
 Which report can be used to determine if this is caused by a stale prevention policy?
 
 - Prevention Policy Audit Log✅
@@ -466,55 +531,24 @@ Which report can be used to determine if this is caused by a stale prevention po
 - Machine-Learning Prevention Monitoring Audit Log
 - Sensor Visibility Exclusions Audit Log
 
-### Correct answer:
-
-**Prevention Policy, HTTP visibility**
-
 ```
-Prevention Policy
-Sensor Update Policy
-Content Update Policy
-Host retantion Policy
+### Why?
 
-Host setup and management -> List of hosts -> Test-Linux-Prevention
-
-## HTTP visibility checked
-- HTTP visibility, Falcon Sensor actually inspects/monitors unencrypted HTTP traffic on the endpoint.
-- Allows the sensor to monitor unencrypted HTTP traffic for malicious patterns and improved detections.
-
-For unencrypted HTTP, the sensor can inspect things such as:
-
-HTTP requests
-URLs
-HTTP headers
-Content/payload that is transmitted in clear text
-Potential malicious patterns
-
-- Visibility = Give the Falcon Sensor the ability to see/inspect activity.
+- The key phrase in the question is "stale prevention policy" — not stale exclusion, not stale allowlist entry. That's specifically asking you to check whether the policy itself
+- Audit logs -> Prevention Policy -> Prevention policy audit trail
 ```
 
-**FTP visibility**
-
-```
-FTP visibility
-Allows the sensor to monitor unencrypted FTP traffic for malicious patterns and improved detections.
-
-```
-
-#### 🧠 Very simple exam memory
-
-- [Protocol] Visibility = Sensor can see/inspect that protocol's traffic
-- Visibility ≠ automatically block
-- If Falcon identifies something malicious, other prevention/detection mechanisms can take action according to the applicable policy.
-
-## Question 25 of 25
+## Question 25 of 25✅
 
 What is the most efficient sequence of steps to delete a sensor update policy?
 
-- From the policy's settings, disable the policy, then click Delete✅
+1. From the policy's settings, disable the policy, then click Delete✅
+2. From the policy's settings, disable all toggles first, then click Delete
+3. Remove the policy from all assigned host groups, disable the policy, then click Delete from the policy's settings
+4. Remove the policy from all assigned host groups, then click Delete from the policy's settings
 
-- From the policy's settings, disable all toggles first, then click Delete
+```
+### Why?
 
-- Remove the policy from all assigned host groups, disable the policy, then click Delete from the policy's settings
-
-- Remove the policy from all assigned host groups, then click Delete from the policy's settings
+Host setup and management -> select a policy -> Disable policy
+```
