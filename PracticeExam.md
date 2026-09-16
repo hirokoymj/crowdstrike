@@ -329,7 +329,6 @@ What is the first step you should take?
 ## Why?
 
 "Changes Pending" means the Falcon Console has queued a policy update (in this case, a sensor version update) for the host, but the sensor hasn't checked in to actually apply it yet. That status just reflects the last known communication state — so the very first thing to rule out is whether the host is even online and able to talk to the CrowdStrike cloud at all.
-
 ```
 
 ## Question 15 of 25✅
@@ -352,9 +351,7 @@ What least privilege role would be utilized to extract a quarantined file as a p
 
 ## Question 16 of 25✅
 
-An internally used customer application is being blocked by the Falcon sensor. The application is updated infrequently.
-
-Which IOC type and action should you set to allow use of the application?
+An internally used customer application is being blocked by the Falcon sensor. The application is updated infrequently. Which IOC type and action should you set to allow use of the application?
 
 - Add the IPs the application uses and set action to No Action
 - Add the name of the application and set action to Allow
@@ -519,6 +516,7 @@ What action will disable RTR on these hosts?
 - Real Time Response (RTR) is Falcon's remote shell capability
 — it lets an analyst with the right role connect directly to a live endpoint through the Falcon Console and interact with it in near real-time
 - without needing physical or VPN/RDP access to the machine. It's the tool you'd reach for during active incident response.
+- Host setup and management → Response Policies
 ```
 
 ## Question 24 of 25 ✅
