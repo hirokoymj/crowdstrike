@@ -519,6 +519,8 @@ What action will disable RTR on these hosts?
 - Host setup and management → Response Policies
 ```
 
+![](./RTR.png)
+
 ## Question 24 of 25 ✅
 
 A Falcon sensor in your environment is generating alerts for a binary that has already been allowlisted.
