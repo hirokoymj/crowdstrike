@@ -33,6 +33,7 @@
   - [Question 21 of 25✅](#question-21-of-25)
   - [Question 22 of 25✅](#question-22-of-25)
   - [Question 23 of 25✅](#question-23-of-25)
+    - [why?](#why-8)
   - [Question 24 of 25 ✅](#question-24-of-25-)
   - [Question 25 of 25✅](#question-25-of-25)
 
@@ -269,6 +270,8 @@ Which additional default role is also required to allow them to manage sensor de
 - Remediation Manager (19)
 - Detections Exception Manager (50)
 - Desktop Support Analyst (35)
+
+TTSUSTraining@9QAZ
 
 ### Why
 
@@ -531,14 +534,9 @@ What action will disable RTR on these hosts?
 - Apply a top precedence policy with the RTR access turned off to the host group✅
 - Edit the Default RTR Policy to exclude the host group
 
-```
 ### why?
 
-- Real Time Response (RTR) is Falcon's remote shell capability
-— it lets an analyst with the right role connect directly to a live endpoint through the Falcon Console and interact with it in near real-time
-- without needing physical or VPN/RDP access to the machine. It's the tool you'd reach for during active incident response.
 - Host setup and management → Response Policies
-```
 
 ![](./RTR.png)
 
